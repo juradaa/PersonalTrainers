@@ -37,7 +37,7 @@ public class Subscription {
 	@CollectionTable(name = "subscription_type", joinColumns = @JoinColumn(name = "subscription_id"))
 	@Enumerated(EnumType.STRING)
 	@NotEmpty
-	private Set<@NotNull SubcriptionType> subscriptionTypes = new HashSet<>();
+	private Set<SubcriptionType> subscriptionTypes = new HashSet<>();
 
 	@Min(1)
 	@Max(7)
@@ -49,7 +49,7 @@ public class Subscription {
 	@Builder.Default
 	@ElementCollection
 	@CollectionTable(name = "dietary_restriction", joinColumns = @JoinColumn(name = "subscription_id"))
-	private Set<@NotBlank String> dietaryRestrictions = new HashSet<>();
+	private Set<String> dietaryRestrictions = new HashSet<>();
 
 	@Positive
 	private Integer dailyCalorieCount;

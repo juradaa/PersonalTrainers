@@ -6,9 +6,15 @@ import edu.jurada.backend.utils.ValidationUtil;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import java.util.Objects;
+
 public class SubscriptionTypeValidator implements ConstraintValidator<ValidSubscriptionType, Subscription> {
 	@Override
 	public boolean isValid(Subscription subscription, ConstraintValidatorContext constraintValidatorContext) {
+		boolean allTypesValid = subscription.getSubscriptionTypes().stream().noneMatch(Objects::isNull);
+		if(!allTypesValid){
+			return false;
+		}
 		boolean isDiet = subscription.getSubscriptionTypes().contains(SubcriptionType.DIET);
 		boolean areDietFieldsValid = ValidationUtil.isNullValidForType(isDiet, subscription.getDailyCalorieCount()) &&
 				ValidationUtil.isStringExistenceValidForType(isDiet, subscription.getCuisineDescription());

@@ -22,12 +22,14 @@ import java.util.TreeSet;
 @Entity
 @SuperBuilder
 @Data
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @ValidTrainerType
 public class Trainer extends Person {
 	//TODO: update cld to reflect 2 way dynamic
 
+	@ToString.Exclude
 	private final int ALERT_MONTH_LIMIT= 3;
 
 	@NotNull
