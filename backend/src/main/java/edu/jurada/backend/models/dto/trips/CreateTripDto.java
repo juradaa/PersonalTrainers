@@ -1,8 +1,6 @@
 package edu.jurada.backend.models.dto.trips;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import edu.jurada.backend.models.dto.people.SimpleTrainerViewDto;
 import edu.jurada.backend.models.validation.TemporalRangeEvent;
 import edu.jurada.backend.models.validation.ValidTemporalRange;
 import jakarta.validation.constraints.*;
@@ -12,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +21,7 @@ public class CreateTripDto implements TemporalRangeEvent {
 	@NotBlank
 	private String name;
 	@NotBlank
-	@Size(min=25)
+	@Size(min = 25)
 	private String description;
 	@NotBlank
 	private String destination;

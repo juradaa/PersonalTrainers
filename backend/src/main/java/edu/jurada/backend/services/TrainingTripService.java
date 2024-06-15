@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface TrainingTripService {
 	List<TrainingTrip> getFutureTripsForTrainer(long trainerId);
+
 	TrainingTrip createTrip(TrainingTrip trainingTrip, List<Gear> gear, Trainer trainer);
 }

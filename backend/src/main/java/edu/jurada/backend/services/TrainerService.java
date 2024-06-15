@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface TrainerService {
 
 	List<Trainer> searchSeniorTrainers(String phrase);
+
 	boolean exists(long id);
+
 	Optional<Trainer> findById(Long id);
 }
