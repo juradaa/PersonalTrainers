@@ -129,7 +129,7 @@ public class DataSeeder {
 				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
 				.topics(Set.of("Siła", "Masa"))
 				.startDate(LocalDate.parse("2024-07-15"))
-				.endDate(LocalDate.parse("2024-07-27"))
+				.endDate(LocalDate.parse("2024-07-24"))
 				.baseStatus(TripStatus.PUBLISHED)
 				.build();
 

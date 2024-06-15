@@ -6,8 +6,8 @@ export default interface TrainingTrip{
     description: string,
     destination: string,
     topics: Topic[],
-    startDate?: Date,
-    endDate?: Date,
+    startDate?: Date | null,
+    endDate?: Date | null,
     shouldPublishImmediately: boolean,
     gearIds: Set<number>,
     trainer?: Trainer

@@ -10,4 +10,5 @@ public interface GearCategoryRepository extends JpaRepository<GearCategory, Long
 
 	@Query("from GearCategory gc left join fetch gc.gearSet where gc.id = :id")
 	Optional<GearCategory> findByIdWithGear(long id);
+
 }

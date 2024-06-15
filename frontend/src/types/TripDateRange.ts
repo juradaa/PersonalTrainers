@@ -1,5 +1,5 @@
 export default interface TripDateRange{
-    startDate: Date,
-    endDate: Date,
+    startDate: string,
+    endDate: string,
     name: string
 }

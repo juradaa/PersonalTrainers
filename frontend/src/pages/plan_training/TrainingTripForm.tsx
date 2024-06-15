@@ -41,14 +41,15 @@ export const TrainingTripForm = () => {
                    setTripData={setTripData}
                    setStep={setStep}/>,
         <FinalDateChoiceStep tripData={tripData}
-                             setTripData={setTripData}/>]
+                             setTripData={setTripData}
+                             setStep={setStep}/>]
 
 
     return (
         <>
             <div className="grid place-content-center min-h-screen bg-slate-100">
                 <div className="lg:w-[58rem] min-h-[40rem] bg-white rounded-xl">
-                    <form ref={formRef} className="px-4 md:px-24 py-16 h-full text-lg">
+                    <form ref={formRef} className="px-4  md:px-8 lg:px-24 py-16 h-full text-lg">
                         {steps[step]}
                     </form>
                 </div>

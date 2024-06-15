@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface GearService {
 	public List<GearCategory> getAllGearCategories();
 	public Optional<GearCategory> getWithGear(long id);
+	public List<Gear> findAllById(List<Long> ids);
 
 }
