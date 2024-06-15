@@ -7,4 +7,5 @@ import java.util.List;
 public interface TrainerService {
 
 	List<Trainer> searchSeniorTrainers(String phrase);
+	boolean exists(long id);
 }

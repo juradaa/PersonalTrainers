@@ -27,7 +27,7 @@ export const GearCheckbox = ({tripData, setTripData, gear}: Props) => {
                         flex items-center gap-4">
             <input
                 type="checkbox"
-                onClick={onClick}
+                onChange={onClick}
                 checked={tripData.gearIds.has(gear.id)}
                 className="w-6 h-6 rounded-md checked:text-purple-700"
             />

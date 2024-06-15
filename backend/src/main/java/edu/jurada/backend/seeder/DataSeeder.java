@@ -5,17 +5,24 @@ import edu.jurada.backend.models.people.Trainer;
 import edu.jurada.backend.models.people.TrainerType;
 import edu.jurada.backend.models.trips.Gear;
 import edu.jurada.backend.models.trips.GearCategory;
+import edu.jurada.backend.models.trips.TrainingTrip;
+import edu.jurada.backend.models.trips.TripStatus;
 import edu.jurada.backend.repositories.people.TrainerRepository;
 import edu.jurada.backend.repositories.trips.GearCategoryRepository;
 import edu.jurada.backend.repositories.trips.GearRepository;
+import edu.jurada.backend.repositories.trips.TrainingTripRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -23,10 +30,17 @@ public class DataSeeder {
 	private final TrainerRepository trainerRepository;
 	private final GearCategoryRepository gearCategoryRepository;
 	private final GearRepository gearRepository;
+	private final TrainingTripRepository trainingTripRepository;
+
+	Logger logger = LoggerFactory.getLogger(DataSeeder.class);
 
 	@EventListener
 	public void atStart(ContextRefreshedEvent event) {
-		System.out.println("Hello there");
+		if (gearRepository.count() > 0) {
+			logger.trace("Database not empty. Seeding aborted.");
+			return;
+		}
+		logger.trace("Seeding the database...");
 		Trainer ts1 = Trainer.builder()
 				.type(TrainerType.SENIOR)
 				.specialization("Strength training")
@@ -94,8 +108,45 @@ public class DataSeeder {
 				.gearCategory(gc2)
 				.name("Sztangi")
 				.build();
-		gearRepository.saveAll(List.of(g1,g2,g3,g4));
+		gearRepository.saveAll(List.of(g1, g2, g3, g4));
 
+		TrainingTrip tt1 = TrainingTrip.builder()
+				.trainer(ts2)
+				.name("Kalistenika")
+				.destination("Sosnowiec")
+				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
+				.topics(Set.of("Siła", "Masa"))
+				.startDate(LocalDate.parse("2024-06-15"))
+				.endDate(LocalDate.parse("2024-06-27"))
+				.baseStatus(TripStatus.PUBLISHED)
+				.build();
+
+
+		TrainingTrip tt2 = TrainingTrip.builder()
+				.name("Cardio")
+				.trainer(ts2)
+				.destination("Sosnowiec")
+				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
+				.topics(Set.of("Siła", "Masa"))
+				.startDate(LocalDate.parse("2024-07-15"))
+				.endDate(LocalDate.parse("2024-07-27"))
+				.baseStatus(TripStatus.PUBLISHED)
+				.build();
+
+		TrainingTrip tt3 = TrainingTrip.builder()
+				.name("Siłownia")
+				.trainer(ts2)
+				.destination("Sosnowiec")
+				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
+				.topics(Set.of("Siła", "Masa"))
+				.startDate(LocalDate.parse("2024-06-25"))
+				.endDate(LocalDate.parse("2024-07-07"))
+				.baseStatus(TripStatus.PUBLISHED)
+				.build();
+
+		trainingTripRepository.saveAll(List.of(tt1,tt2,tt3));
+
+		logger.trace("Seeding the database completed");
 
 	}
 }

@@ -60,8 +60,7 @@ public class Trainer extends Person {
 
 	private String specialization;
 
-	// TODO: check out orphan removal
-	@OneToMany(mappedBy = "trainer")
+	@OneToMany(mappedBy = "trainer", orphanRemoval = true)
 	@Builder.Default
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude

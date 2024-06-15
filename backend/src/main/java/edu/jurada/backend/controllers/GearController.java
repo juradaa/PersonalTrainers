@@ -7,6 +7,8 @@ import edu.jurada.backend.models.trips.GearCategory;
 import edu.jurada.backend.services.GearService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +31,9 @@ public class GearController {
 
 
 
+	Logger logger = LoggerFactory.getLogger(GearController.class);
 	@GetMapping
 	public ResponseEntity<List<GearCategoryDto>> gearCategoryDtoList() {
-		System.out.println("in gear category");
 		List<GearCategory> categories = gearService.getAllGearCategories();
 		List<GearCategoryDto> dtos = categories.stream().map((element) -> modelMapper.map(element, GearCategoryDto.class)).collect(Collectors.toList());
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
@@ -39,7 +41,6 @@ public class GearController {
 
 	@GetMapping("{id}/gear")
 	public ResponseEntity<List<GearDto>> getGearsCategory(@PathVariable("id") long id){
-		System.out.printf("In gear");
 		Optional<GearCategory> withGear = gearService.getWithGear(id);
 		if(withGear.isEmpty()){
 			System.out.println("id = " + id);

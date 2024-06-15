@@ -23,6 +23,7 @@ import java.util.Set;
 @Data
 @ValidTemporalRange
 @ValidTripStatus
+@Table(indexes = @Index(name = "end_date_idx", columnList = "end_date"))
 public class TrainingTrip implements TemporalRangeEvent {
 
 	@Id
@@ -36,14 +37,19 @@ public class TrainingTrip implements TemporalRangeEvent {
 	@Size(min = 25)
 	private String description;
 
+	@NotBlank
+	private String destination;
+
 	@ElementCollection
 	@NotEmpty
 	@CollectionTable
 	private Set<String> topics;
 
 	@NotNull
+	@Column(name = "start_date")
 	private LocalDate startDate;
 	@NotNull
+	@Column(name = "end_date")
 	private LocalDate endDate;
 
 	@Enumerated(EnumType.STRING)

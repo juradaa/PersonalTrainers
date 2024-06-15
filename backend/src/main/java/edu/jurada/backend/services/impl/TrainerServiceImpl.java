@@ -18,4 +18,9 @@ public class TrainerServiceImpl implements TrainerService {
 	public List<Trainer> searchSeniorTrainers(String phrase) {
 		return trainerRepository.searchSeniors(phrase);
 	}
+
+	@Override
+	public boolean exists(long id) {
+		return trainerRepository.existsById(id);
+	}
 }

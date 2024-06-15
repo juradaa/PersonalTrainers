@@ -4,6 +4,8 @@ import {GeneralInformation} from "./components/GeneralInformation.tsx";
 import {TrainerChoiceStep} from "./components/TrainerChoiceStep/TrainerChoiceStep.tsx";
 import GearCategory from "../../types/GearCategory.ts";
 import {CategoriesStep} from "./components/CategoriesStep/CategoriesStep.tsx";
+import {TopicStep} from "./components/TopicsStep/TopicStep.tsx";
+import {FinalDateChoiceStep} from "./components/FinalDateChoiceStep/FinalDateChoiceStep.tsx";
 
 export const TrainingTripForm = () => {
     const formRef = useRef(null);
@@ -22,27 +24,34 @@ export const TrainingTripForm = () => {
 
     const [gearCategories, setGearCategories] = useState<GearCategory[]>();
 
-    const steps = [<GeneralInformation tripData={tripData}
-                                       setTripData={setTripData}
-                                       formRef={formRef}
-                                       setStep={setStep}/>,
-                                <TrainerChoiceStep tripData={tripData}
-                                setTripData={setTripData}
-                                setStep={setStep}/>,
-                                <CategoriesStep tripData={tripData} setTripData={setTripData} setStep={setStep} gearCategories={gearCategories} setGearCategories={setGearCategories}/>]
-
+    const steps = [
+        <GeneralInformation tripData={tripData}
+                            setTripData={setTripData}
+                            formRef={formRef}
+                            setStep={setStep}/>,
+        <TrainerChoiceStep tripData={tripData}
+                           setTripData={setTripData}
+                           setStep={setStep}/>,
+        <CategoriesStep tripData={tripData}
+                        setTripData={setTripData}
+                        setStep={setStep}
+                        gearCategories={gearCategories}
+                        setGearCategories={setGearCategories}/>,
+        <TopicStep tripData={tripData}
+                   setTripData={setTripData}
+                   setStep={setStep}/>,
+        <FinalDateChoiceStep tripData={tripData}
+                             setTripData={setTripData}/>]
 
 
     return (
         <>
             <div className="grid place-content-center min-h-screen bg-slate-100">
-                <div className="lg:w-[58rem] h-[40rem] bg-white rounded-xl">
+                <div className="lg:w-[58rem] min-h-[40rem] bg-white rounded-xl">
                     <form ref={formRef} className="px-4 md:px-24 py-16 h-full text-lg">
                         {steps[step]}
                     </form>
-
                 </div>
-
             </div>
         </>
     );

@@ -1,5 +1,5 @@
 import TrainingTrip from "../../../../types/TrainingTrip.ts";
-import React, {MouseEventHandler, SetStateAction, useEffect, useState} from "react";
+import React, {SetStateAction, useEffect, useState} from "react";
 import GearCategory from "../../../../types/GearCategory.ts";
 import {getAllCategories, getGearForCategory} from "../../../../services/gearService.ts";
 import {GearCategoryLi} from "./GearCategoryLi.tsx";
@@ -62,17 +62,17 @@ export const CategoriesStep = ({tripData, setTripData, setStep, gearCategories, 
                         {currentCategory != undefined && gearCategories != undefined &&
                             gearCategories?.filter(gc => gc.id == currentCategory)[0]
                                 .gearList!.map(g => <GearCheckbox tripData={tripData} setTripData={setTripData}
-                                                                  gear={g}/>)}
+                                                                  gear={g} key={g.id}/>)}
                     </ul>
                 </div>
             </div>
 
             <div className="mt-auto flex justify-between">
-                <SimpleButton onClick={()=>setStep(s=>s-1)}>
+                <SimpleButton onClick={() => setStep(s => s - 1)}>
                     Wróć
                 </SimpleButton>
 
-                <ValidButton enabled={true} onClick={()=>setStep(s=>s+1)}>
+                <ValidButton enabled={true} onClick={() => setStep(s => s + 1)}>
                     Dalej
                 </ValidButton>
             </div>
