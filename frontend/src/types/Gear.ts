@@ -1,3 +1,5 @@
 export default interface Gear{
-    name: string
+    id: number
+    name: string,
+    exerciseDescription: string
 }
