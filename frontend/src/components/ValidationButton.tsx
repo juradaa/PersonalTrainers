@@ -8,7 +8,7 @@ type Props ={
 }
 export const ValidationButton = ({enabled, onClick, children, className}: Props) => {
     return (
-        <button className={`py-4 text-center text-lg min-w-32 font-semibold rounded-md hover:shadow-inner
+        <button className={`-px-6 md:px-0 py-2 md:py-4 text-center text-lg min-w-32 font-semibold rounded-md hover:shadow-inner
                             ${enabled ? 'bg-sky-900 text-white' : 'bg-sky-700 text-slate-400'} ${className}`}
                 disabled={!enabled} onClick={onClick}
                 type={"button"}>

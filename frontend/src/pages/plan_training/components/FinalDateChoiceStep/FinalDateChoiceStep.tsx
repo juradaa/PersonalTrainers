@@ -76,7 +76,7 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
     return (
         <div className="h-full flex flex-col">
             <h2 className="text-3xl font-semibold mb-4">Wybierz datę</h2>
-            <div className="flex gap-8 text-xl">
+            <div className="flex gap-8 text-xl flex-col sm:flex-row">
                 <div className="grow-[1]  basis-0">
                     <DatePicker
                         locale="pl"
@@ -96,7 +96,7 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
                     </ul>
                 </div>
             </div>
-            <div className="mt-auto bg-violet-100 flex justify-center gap-16 text-violet-900 font-semibold p-4 mb-4">
+            <div className="mt-auto bg-violet-100 flex justify-center items-center  gap-2 sm:gap-4 md:gap-16 text-violet-900 font-semibold p-4 mb-4">
                 <p>dodaj szkic</p>
                 <Toggle onClick={onToggle} isActive={tripData.shouldPublishImmediately}/>
                 <p>opublikuj</p>

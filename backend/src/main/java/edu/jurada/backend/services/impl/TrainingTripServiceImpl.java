@@ -32,7 +32,7 @@ public class TrainingTripServiceImpl implements TrainingTripService {
 	public TrainingTrip createTrip(TrainingTrip trainingTrip, List<Gear> gear, Trainer trainer) {
 		// propagation is the same as default
 		// isolation is serializable, because we do not want an overlapping trip phantom to appear
-		if (trainingTripRepository.existsOverlapping(trainingTrip.getStartDate(), trainingTrip.getEndDate())) {
+		if (trainingTripRepository.existsOverlapping(trainer ,trainingTrip.getStartDate(), trainingTrip.getEndDate())) {
 			throw new TripsOverlapException();
 		}
 		for (Gear g : gear) {
