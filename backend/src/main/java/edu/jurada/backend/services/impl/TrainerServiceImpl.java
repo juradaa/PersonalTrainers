@@ -29,4 +29,9 @@ public class TrainerServiceImpl implements TrainerService {
 	public Optional<Trainer> findById(Long id) {
 		return trainerRepository.findById(id);
 	}
+
+	@Override
+	public Long countSeniors() {
+		return trainerRepository.countSeniors();
+	}
 }

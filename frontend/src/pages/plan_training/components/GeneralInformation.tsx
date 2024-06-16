@@ -1,7 +1,7 @@
 import TrainingTrip from "../../../types/TrainingTrip.ts";
 import React, {ChangeEvent, RefObject, SetStateAction} from "react";
 import {EnhancedInput} from "../../../components/EnhancedInput.tsx";
-import {ValidButton} from "../../../components/ValidButton.tsx";
+import {ValidationButton} from "../../../components/ValidationButton.tsx";
 import {EnhancedTextArea} from "../../../components/EnhancedTextArea.tsx";
 
 type Props = {
@@ -66,9 +66,9 @@ export const GeneralInformation = ({tripData, setTripData, setStep, formRef}: Pr
                 </div>
             </div>
             <div className="flex justify-end">
-                <ValidButton enabled={true} onClick={moveNext}>
+                <ValidationButton enabled={true} onClick={moveNext}>
                     Dalej
-                </ValidButton>
+                </ValidationButton>
 
             </div>
         </div>

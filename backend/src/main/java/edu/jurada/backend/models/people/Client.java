@@ -51,6 +51,11 @@ public class Client extends Person {
 	private Set<TrainingTrip> trainingTrips = new HashSet<>();
 
 
+	/**
+	 * @inheritDocs
+	 * Client classes implementation checks whether a client has a subscription
+	 * that is currently active
+	 */
 	@Override
 	public boolean checkIfShouldNotify() {
 		LocalDate now = LocalDate.now();

@@ -25,15 +25,15 @@ public class TrainerController {
 	private final TrainingTripService trainingTripService;
 
 	@GetMapping("/seniors")
-	public ResponseEntity<List<SimpleTrainerViewDto>> search(@RequestParam String searched){
+	public ResponseEntity<List<SimpleTrainerViewDto>> search(@RequestParam String searched) {
 		List<Trainer> trainers = trainerService.searchSeniorTrainers(searched);
 		List<SimpleTrainerViewDto> trainerDtos = trainers.stream().map((element) -> modelMapper.map(element, SimpleTrainerViewDto.class)).toList();
 		return new ResponseEntity<>(trainerDtos, HttpStatus.OK);
 	}
 
 	@GetMapping("{id}/future/trips")
-	public ResponseEntity<List<SimpleTripDateViewDto>> getTrainersFutureTrips(@PathVariable("id") long id){
-		if(!trainerService.exists(id)){
+	public ResponseEntity<List<SimpleTripDateViewDto>> getTrainersFutureTrips(@PathVariable("id") long id) {
+		if (!trainerService.exists(id)) {
 			return ResponseEntity.notFound().build();
 		}
 		List<TrainingTrip> futureTripsForTrainer = trainingTripService.getFutureTripsForTrainer(id);
@@ -42,5 +42,12 @@ public class TrainerController {
 				.toList();
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
+
+	@GetMapping("seniors/count")
+	public ResponseEntity<Long> getSeniorTrainerCount(){
+		Long count = trainerService.countSeniors();
+		return new ResponseEntity<>(count, HttpStatus.OK);
+	}
+
 
 }

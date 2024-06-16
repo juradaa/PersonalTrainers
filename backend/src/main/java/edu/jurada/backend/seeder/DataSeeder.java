@@ -1,12 +1,19 @@
 package edu.jurada.backend.seeder;
 
 
+import edu.jurada.backend.models.entitlements.*;
+import edu.jurada.backend.models.people.Client;
 import edu.jurada.backend.models.people.Trainer;
 import edu.jurada.backend.models.people.TrainerType;
 import edu.jurada.backend.models.trips.Gear;
 import edu.jurada.backend.models.trips.GearCategory;
 import edu.jurada.backend.models.trips.TrainingTrip;
 import edu.jurada.backend.models.trips.TripStatus;
+import edu.jurada.backend.repositories.entitlements.CertificateRepository;
+import edu.jurada.backend.repositories.entitlements.CertificationRepository;
+import edu.jurada.backend.repositories.entitlements.ClientsSubscriptionRepository;
+import edu.jurada.backend.repositories.entitlements.SubscriptionRepository;
+import edu.jurada.backend.repositories.people.ClientRepository;
 import edu.jurada.backend.repositories.people.TrainerRepository;
 import edu.jurada.backend.repositories.trips.GearCategoryRepository;
 import edu.jurada.backend.repositories.trips.GearRepository;
@@ -14,6 +21,7 @@ import edu.jurada.backend.repositories.trips.TrainingTripRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -32,7 +40,14 @@ public class DataSeeder {
 	private final GearRepository gearRepository;
 	private final TrainingTripRepository trainingTripRepository;
 
+	private final CertificationRepository certificationRepository;
+	private final CertificateRepository certificateRepository;
+
+
 	Logger logger = LoggerFactory.getLogger(DataSeeder.class);
+	private final SubscriptionRepository subscriptionRepository;
+	private final ClientRepository clientRepository;
+	private final ClientsSubscriptionRepository clientsSubscriptionRepository;
 
 	@EventListener
 	public void atStart(ContextRefreshedEvent event) {
@@ -144,7 +159,65 @@ public class DataSeeder {
 				.baseStatus(TripStatus.PUBLISHED)
 				.build();
 
-		trainingTripRepository.saveAll(List.of(tt1,tt2,tt3));
+		trainingTripRepository.saveAll(List.of(tt1, tt2, tt3));
+
+		Certificate c1 = Certificate.builder()
+				.name("Hipertrofia")
+				.institution("Akademia Nauk Sportowych")
+				.build();
+		Certificate c2 = Certificate.builder()
+				.name("Układ krążeniowy człowieka III")
+				.institution("Polskie towarzystwo kardiologiczne")
+				.build();
+
+		certificateRepository.saveAll(List.of(c1, c2));
+
+		Certification cn1 = Certification.builder()
+				.issueDate(LocalDate.parse("2020-01-11"))
+				.trainer(ts1)
+				.certificate(c1)
+				.build();
+		c1.getCertifications().add(cn1);
+		ts1.getCertifications().add(cn1);
+
+		Certification cn2 = Certification.builder()
+				.issueDate(LocalDate.parse("2019-01-11"))
+				.trainer(ts1)
+				.certificate(c2)
+				.build();
+		c2.getCertifications().add(cn2);
+		ts1.getCertifications().add(cn2);
+		certificationRepository.saveAll(List.of(cn1, cn2));
+		logger.trace(ts1.getCertifications().toString());
+		Subscription subscription = Subscription.builder()
+				.subscriptionTypes(Set.of(SubcriptionType.GYM, SubcriptionType.DIET))
+				.entrancesPerWeek(3)
+				.hoursWithTrainer(1)
+				.dailyCalorieCount(2000)
+				.dietaryRestrictions(Set.of("Vegan", "Lactose Intolerant"))
+				.cuisineDescription("Good i guess")
+				.name("Pełny plan dieta + siłownia dla zabieganychj")
+				.description("Plan łączący dietę i 3 godziny w siłowni dla osób zaczynających przygodę z fitnessem")
+				.cost(BigDecimal.ONE)
+				.build();
+		subscriptionRepository.save(subscription);
+
+		Client cl1 = Client.builder().creditCardNumber("4539135733660738")
+				.weight(70)
+				.height(1.80)
+				.goal("Rozwój mięśni")
+				.name("Marek Tarek")
+				.alias("matar")
+				.build();
+		clientRepository.save(cl1);
+		ClientsSubscription cs = ClientsSubscription.builder()
+				.startDate(LocalDate.parse("2023-11-11"))
+				.endDate(LocalDate.parse("2024-11-11"))
+				.isPaid(true)
+				.subscription(subscription)
+				.client(cl1)
+				.build();
+		clientsSubscriptionRepository.save(cs);
 
 		logger.trace("Seeding the database completed");
 

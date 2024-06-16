@@ -31,7 +31,6 @@ public class Subscription {
 	@Positive
 	private BigDecimal cost;
 
-	// TODO: consider enumset
 	@Builder.Default
 	@ElementCollection
 	@CollectionTable(name = "subscription_type", joinColumns = @JoinColumn(name = "subscription_id"))

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Table(uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"certificate_id","trainer_id"})
 })
-public class Certification implements Comparable<Certification>{
+public class Certification{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -41,14 +41,4 @@ public class Certification implements Comparable<Certification>{
 	@NotNull
 	private Trainer trainer;
 
-	@Override
-	public int compareTo(Certification c) {
-		if (this.getIssueDate().isBefore(c.getIssueDate())) {
-			return -1;
-		}else if(this.getIssueDate().isAfter(c.getIssueDate())){
-			return 1;
-		}else{
-			return 0;
-		}
-	}
 }

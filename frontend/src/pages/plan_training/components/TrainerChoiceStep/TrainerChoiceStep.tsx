@@ -4,7 +4,7 @@ import {searchSenior} from "../../../../services/trainerService.ts";
 import {TrainerListItem} from "./TrainerListItem.tsx";
 import {ChosenTrainerInfo} from "./ChosenTrainerInfo.tsx";
 import TrainingTrip from "../../../../types/TrainingTrip.ts";
-import {ValidButton} from "../../../../components/ValidButton.tsx";
+import {ValidationButton} from "../../../../components/ValidationButton.tsx";
 import {SimpleButton} from "../../../../components/SimpleButton.tsx";
 
 type Props ={
@@ -48,7 +48,7 @@ export const TrainerChoiceStep = ({tripData, setTripData, setStep} : Props) => {
         <div className="flex flex-col h-full">
             <input value={searched} onChange={(e) => (setSearched(e.target.value))}
                    className="rounded-md mb-8 w-full"/>
-            <div className="flex h-full">
+            <div className="flex flex-col-reverse md:flex-row  h-full">
                 <div className="grow-[3] basis-0">
                     {trainers == null ?
                         <p>Type at least 3 characters to see the results</p>
@@ -61,7 +61,7 @@ export const TrainerChoiceStep = ({tripData, setTripData, setStep} : Props) => {
                                 trainer={tr}/>)}
                         </ul>}
                 </div>
-                <div className="grow-[2] basis-0">
+                <div className="grow-[2] basis-0 mb-6 md:mt-0">
                     <ChosenTrainerInfo trainer={tripData.trainer}/>
                 </div>
             </div>
@@ -70,9 +70,9 @@ export const TrainerChoiceStep = ({tripData, setTripData, setStep} : Props) => {
                     Wróć
                 </SimpleButton>
 
-                <ValidButton enabled={tripData.trainer !== undefined} onClick={()=>setStep(s=>s+1)}>
+                <ValidationButton enabled={tripData.trainer !== undefined} onClick={()=>setStep(s=>s+1)}>
                     Dalej
-                </ValidButton>
+                </ValidationButton>
             </div>
         </div>
     );

@@ -1,11 +1,12 @@
 import './App.css'
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
 import {TrainingTripForm} from "./pages/plan_training/TrainingTripForm.tsx";
+import {IndexPage} from "./pages/index/IndexPage.tsx";
 
 function App() {
     const router = createBrowserRouter(createRoutesFromElements(
         <Route path="/">
-            <Route index element={<h1>hello</h1>}/>
+            <Route index element={<IndexPage/>}/>
             <Route path="planTrip" element={<TrainingTripForm/>}/>
         </Route>
     ));

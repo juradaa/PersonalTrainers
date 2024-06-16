@@ -5,7 +5,7 @@ import Topic from "../../../../types/Topic.ts";
 import {nanoid} from "nanoid";
 import {FaCirclePlus} from "react-icons/fa6";
 import {SimpleButton} from "../../../../components/SimpleButton.tsx";
-import {ValidButton} from "../../../../components/ValidButton.tsx";
+import {ValidationButton} from "../../../../components/ValidationButton.tsx";
 
 type Props = {
     tripData: TrainingTrip,
@@ -54,13 +54,13 @@ export const TopicStep = ({tripData, setTripData, setStep}: Props) => {
                     Wróć
                 </SimpleButton>
 
-                <ValidButton
+                <ValidationButton
                     enabled={ tripData.topics.length > 0 &&
                             tripData.topics.filter(t=>t.topic.trim().length >0).length == tripData.topics.length}
                     onClick={() => setStep(s => s + 1)}
                     >
                     Dalej
-                </ValidButton>
+                </ValidationButton>
             </div>
 
         </div>

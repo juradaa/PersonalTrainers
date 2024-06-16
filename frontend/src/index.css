@@ -8,3 +8,14 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.triangle{
+    --arr-size: 9px;
+    border-bottom:var(--arr-size) solid transparent ;
+    border-top: var(--arr-size) solid transparent;
+    border-left: var(--arr-size) solid black;
+    position: absolute;
+    right: calc(1px + -1 * var(--arr-size));
+    top: 0px;
+
+}

@@ -82,7 +82,6 @@ public class TrainingTrip implements TemporalRangeEvent {
 	private Set<Client> clients = new HashSet<>();
 
 
-	//TODO: add trainer, clients and validators
 	@ManyToOne
 	@JoinColumn(name = "trainer_id", nullable = false)
 	@ToString.Exclude

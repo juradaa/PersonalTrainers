@@ -2,12 +2,14 @@ package edu.jurada.backend.models.people;
 
 import edu.jurada.backend.exceptions.WrongTypeException;
 import edu.jurada.backend.models.entitlements.Certification;
+import edu.jurada.backend.models.entitlements.comparators.ByIssueDateComparator;
 import edu.jurada.backend.models.people.validation.ValidTrainerType;
 import edu.jurada.backend.models.trips.TrainingTrip;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SortComparator;
 import org.hibernate.annotations.SortNatural;
 import org.springframework.cglib.core.Local;
 
@@ -27,7 +29,6 @@ import java.util.TreeSet;
 @AllArgsConstructor
 @ValidTrainerType
 public class Trainer extends Person {
-	//TODO: update cld to reflect 2 way dynamic
 
 	@ToString.Exclude
 	private final int ALERT_MONTH_LIMIT= 3;
@@ -45,10 +46,9 @@ public class Trainer extends Person {
 	@Builder.Default
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@SortNatural // because ordered
-	private SortedSet<Certification> certifications = new TreeSet<>();
+	@SortComparator(ByIssueDateComparator.class)
+	private SortedSet<Certification> certifications = new TreeSet<>(new ByIssueDateComparator());
 
-	//TODO: validate in validator
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private TrainerType type;
@@ -79,6 +79,13 @@ public class Trainer extends Person {
 		this.type = TrainerType.ASSISTANT;
 	}
 
+	/**
+	 * @inheritDocs
+	 * Trainers implementation checks: for seniors whether they are currently
+	 * responsible for a trip and for assistants whether they have more than
+	 * 3 months of experience
+	 *
+	 */
 	@Override
 	public boolean checkIfShouldNotify() {
 		if (this.type == TrainerType.SENIOR) {

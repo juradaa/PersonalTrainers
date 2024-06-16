@@ -5,7 +5,7 @@ import {getAllCategories, getGearForCategory} from "../../../../services/gearSer
 import {GearCategoryLi} from "./GearCategoryLi.tsx";
 import {GearCheckbox} from "./GearCheckbox.tsx";
 import {SimpleButton} from "../../../../components/SimpleButton.tsx";
-import {ValidButton} from "../../../../components/ValidButton.tsx";
+import {ValidationButton} from "../../../../components/ValidationButton.tsx";
 
 type Props = {
     tripData: TrainingTrip,
@@ -72,9 +72,9 @@ export const CategoriesStep = ({tripData, setTripData, setStep, gearCategories, 
                     Wróć
                 </SimpleButton>
 
-                <ValidButton enabled={true} onClick={() => setStep(s => s + 1)}>
+                <ValidationButton enabled={true} onClick={() => setStep(s => s + 1)}>
                     Dalej
-                </ValidButton>
+                </ValidationButton>
             </div>
         </div>
     );

@@ -25,5 +25,10 @@ public abstract class Person {
 	@Column(unique = true)
 	private String alias;
 
+	/**
+	 * Checks whether the person should be notified according
+	 * to business rules.
+	 * @return whether the person should be notified
+	 */
 	public abstract boolean checkIfShouldNotify();
 }

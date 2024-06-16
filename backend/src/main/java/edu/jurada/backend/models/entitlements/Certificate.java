@@ -1,9 +1,11 @@
 package edu.jurada.backend.models.entitlements;
 
 
+import edu.jurada.backend.models.entitlements.comparators.ByIssueDateComparator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.SortComparator;
 import org.hibernate.annotations.SortNatural;
 
 import java.util.*;
@@ -26,13 +28,12 @@ public class Certificate {
 	@NotBlank
 	private String institution;
 
-	//TODO: consider orphan removal
 	@OneToMany(mappedBy = "certificate", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@Builder.Default
-	@SortNatural //because ordered
-	private SortedSet<Certification> certifications = new TreeSet<>();
+	@SortComparator(ByIssueDateComparator.class)
+	private SortedSet<Certification> certifications = new TreeSet<>(new ByIssueDateComparator());
 
 
 }

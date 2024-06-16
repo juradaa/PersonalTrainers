@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import TrainingTrip from "../../types/TrainingTrip.ts";
 import {GeneralInformation} from "./components/GeneralInformation.tsx";
 import {TrainerChoiceStep} from "./components/TrainerChoiceStep/TrainerChoiceStep.tsx";
@@ -9,7 +9,7 @@ import {FinalDateChoiceStep} from "./components/FinalDateChoiceStep/FinalDateCho
 
 export const TrainingTripForm = () => {
     const formRef = useRef(null);
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(0);
     const [tripData, setTripData] = useState<TrainingTrip>({
         name: "",
         description: "",
@@ -21,6 +21,9 @@ export const TrainingTripForm = () => {
         gearIds: new Set(),
         trainer: undefined
     })
+    useEffect(() => {
+        document.title= "Personal Trainers - Zaplanuj Wycieczkę"
+    }, []);
 
     const [gearCategories, setGearCategories] = useState<GearCategory[]>();
 

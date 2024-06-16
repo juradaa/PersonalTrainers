@@ -9,6 +9,7 @@ import edu.jurada.backend.repositories.trips.TrainingTripRepository;
 import edu.jurada.backend.services.TrainingTripService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +26,12 @@ public class TrainingTripServiceImpl implements TrainingTripService {
 		return trainingTripRepository.findTrainersFutureTrips(trainerId);
 	}
 
+
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public TrainingTrip createTrip(TrainingTrip trainingTrip, List<Gear> gear, Trainer trainer) {
+		// propagation is the same as default
+		// isolation is serializable, because we do not want an overlapping trip phantom to appear
 		if (trainingTripRepository.existsOverlapping(trainingTrip.getStartDate(), trainingTrip.getEndDate())) {
 			throw new TripsOverlapException();
 		}

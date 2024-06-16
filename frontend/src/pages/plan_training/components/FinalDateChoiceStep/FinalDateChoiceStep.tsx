@@ -2,7 +2,7 @@ import React, {SetStateAction, useEffect} from "react";
 import {getTrainersFutureTrips} from "../../../../services/trainerService.ts";
 import TrainingTrip from "../../../../types/TrainingTrip.ts";
 import {SimpleButton} from "../../../../components/SimpleButton.tsx";
-import {ValidButton} from "../../../../components/ValidButton.tsx";
+import {ValidationButton} from "../../../../components/ValidationButton.tsx";
 import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import {pl} from 'date-fns/locale/pl'
@@ -69,7 +69,7 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
 
     const submit = async () => {
         await postTrip(tripData);
-        // navigate("")
+        navigate("/");
     }
 
 
@@ -90,8 +90,9 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
                 </div>
                 <div className="grow-[1] basis-0">
                     <p className="font-semibold">Trener jest zajęty w okresach:</p>
+                    <p className="text-slate-700 font-semibold text-sm mt-1 mb-2">Najedź myszką na wycieczkę aby zobaczyć nazwę</p>
                     <ul className="space-y-2">
-                        {trips?.map(trip => <TripDateLi tripDateRange={trip} isConflicted={trip.isConflicted}/>)}
+                        {trips?.map(trip => <TripDateLi tripDateRange={trip} isConflicted={trip.isConflicted} key={trip.endDate}/>)}
                     </ul>
                 </div>
             </div>
@@ -106,9 +107,9 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
                     Wróć
                 </SimpleButton>
 
-                <ValidButton enabled={enabled} onClick={submit}>
+                <ValidationButton enabled={enabled} onClick={submit}>
                     Dalej
-                </ValidButton>
+                </ValidationButton>
             </div>
         </div>
     );

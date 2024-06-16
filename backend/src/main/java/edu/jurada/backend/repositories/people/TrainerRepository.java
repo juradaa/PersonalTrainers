@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface TrainerRepository extends JpaRepository<Trainer,Long> {
 
-	@Query("from Trainer where type = 'SENIOR' and (name like  concat('%',:phrase,'%') or alias like concat('%',:phrase,'%')) order by case when concat('%', :phrase,'%') = alias or concat('%', :phrase,'%') = name then 0 else case when alias like concat('%', :phrase,'%')then 1 else 2 end end limit 10")
+	@Query("from Trainer where type = 'SENIOR' and (lower(name) like  lower(concat('%',:phrase,'%')) or lower(alias) like lower(concat('%',:phrase,'%'))) order by case when lower(concat('%', :phrase,'%')) = lower(alias) or lower(concat('%', :phrase,'%')) = lower(name) then 0 else case when lower(alias) like lower(concat('%', :phrase,'%')) then 1 else 2 end end limit 10")
 	List<Trainer> searchSeniors(String phrase);
+
+	@Query("select count(*) from Trainer where type = 'SENIOR'")
+	Long countSeniors();
 }

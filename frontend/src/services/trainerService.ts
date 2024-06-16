@@ -9,3 +9,7 @@ export const searchSenior = async (phrase: string): Promise<AxiosResponse<Traine
 export const getTrainersFutureTrips = async (id: number): Promise<AxiosResponse<TripDateRange[]>> =>{
     return await API.get(`trainers/${id}/future/trips`);
 }
+
+export const getTrainerCount = async(): Promise<AxiosResponse<number>> =>{
+    return await API.get('trainers/seniors/count')
+}
