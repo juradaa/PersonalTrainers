@@ -1,8 +1,7 @@
 import TrainingTrip from "../../../types/TrainingTrip.ts";
 import React, {ChangeEvent, RefObject, SetStateAction} from "react";
-import {EnhancedInput} from "../../../components/EnhancedInput.tsx";
 import {ValidationButton} from "../../../components/ValidationButton.tsx";
-import {EnhancedTextArea} from "../../../components/EnhancedTextArea.tsx";
+import EnhancedInputArea from "../../../components/EnhancedInputArea.tsx";
 
 type Props = {
     tripData: TrainingTrip,
@@ -32,36 +31,38 @@ export const GeneralInformation = ({tripData, setTripData, setStep, formRef}: Pr
             <div>
                 <h2 className="text-3xl font-semibold">Podstawowe informacje</h2>
                 <div className="">
-                    <EnhancedInput validationMessage={"To pole jest obowiązkowe"}
-                                   labelMessage={"nazwa:"}
-                                   type="text"
-                                   value={tripData.name}
-                                   id="name"
-                                   name="name"
-                                   required
-                                   onChange={onChange}
-                                   placeholder="Np. Warsztaty kalistenicze w Dąbrowie Górniczej"
+                    <EnhancedInputArea validationMessage={"To pole jest obowiązkowe"}
+                                       labelMessage={"nazwa:"}
+                                       type="text"
+                                       value={tripData.name}
+                                       id="name"
+                                       name="name"
+                                       required
+                                       onChange={onChange}
+                                       placeholder="Np. Warsztaty kalistenicze w Dąbrowie Górniczej"
                     />
-                    <EnhancedInput validationMessage={"To pole jest obowiązkowe"}
-                                   labelMessage={"destynacja"}
-                                   type="text"
-                                   value={tripData.destination}
-                                   id={"destination"}
-                                   name={"destination"}
-                                   required
-                                   onChange={onChange}
-                                   placeholder="Np. Dąbrowa górnicza"
+                    <EnhancedInputArea validationMessage={"To pole jest obowiązkowe"}
+                                       labelMessage={"destynacja"}
+                                       type="text"
+                                       value={tripData.destination}
+                                       id={"destination"}
+                                       name={"destination"}
+                                       required
+                                       onChange={onChange}
+                                       placeholder="Np. Dąbrowa górnicza"
                     />
-                    <EnhancedTextArea validationMessage={"Minimalna długość to 25 znaków"}
-                                   labelMessage={"opis"}
-                                   value={tripData.description}
-                                   id={"description"}
-                                   name={"description"}
-                                   required
-                                   onChange={onChange}
-                                   placeholder="Ważne rzeczy"
-                                      rows={5}
-                                      minLength={25}
+                    <EnhancedInputArea
+                        isTextArea
+                        validationMessage={"Minimalna długość to 25 znaków"}
+                        labelMessage={"opis"}
+                        value={tripData.description}
+                        id={"description"}
+                        name={"description"}
+                        required
+                        onChange={onChange}
+                        placeholder="Ważne rzeczy"
+                        rows={5}
+                        minLength={25}
                     />
                 </div>
             </div>
