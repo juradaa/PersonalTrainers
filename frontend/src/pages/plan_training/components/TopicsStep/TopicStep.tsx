@@ -37,7 +37,7 @@ export const TopicStep = ({tripData, setTripData, setStep}: Props) => {
 
     return (
         <div className="flex flex-col h-full">
-            <h2 className="text-3xl font-semibold">Dodaj tematy (min. 1)</h2>
+            <h2 className="text-3xl font-semibold">Add topics (min. 1)</h2>
             <ul className="space-y-2">
                 {tripData.topics.map(top => <TopicItem setTripData={setTripData} topic={top} key={top.key}/>)}
             </ul>
@@ -51,7 +51,7 @@ export const TopicStep = ({tripData, setTripData, setStep}: Props) => {
             </div>
             <div className="flex justify-between mt-6">
                 <SimpleButton onClick={() => setStep(s => s - 1)}>
-                    Wróć
+                    Back
                 </SimpleButton>
 
                 <ValidationButton
@@ -59,7 +59,7 @@ export const TopicStep = ({tripData, setTripData, setStep}: Props) => {
                             tripData.topics.filter(t=>t.topic.trim().length >0).length == tripData.topics.length}
                     onClick={() => setStep(s => s + 1)}
                     >
-                    Dalej
+                    Next
                 </ValidationButton>
             </div>
 

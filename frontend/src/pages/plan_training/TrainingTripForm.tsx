@@ -22,7 +22,7 @@ export const TrainingTripForm = () => {
         trainer: undefined
     })
     useEffect(() => {
-        document.title= "Personal Trainers - Zaplanuj Wycieczkę"
+        document.title= "Personal Trainers - Plan a trip"
     }, []);
 
     const [gearCategories, setGearCategories] = useState<GearCategory[]>();

@@ -85,52 +85,50 @@ public class DataSeeder {
 				.alias("joesoeu")
 				.build();
 		trainerRepository.save(ts3);
-		List<Trainer> trainers = trainerRepository.searchSeniors("joesoe");
-		System.out.println("trainers = " + trainers);
 
 		GearCategory gc1 = GearCategory.builder()
 				.name("Cardio")
-				.description("Ćwiczenia układu krążenia i spalanie kalorii.")
+				.description("Exercises for strengthening the cardiovascular system and burning calories.")
 				.build();
 
 
 		gearCategoryRepository.save(gc1);
 		GearCategory gc2 = GearCategory.builder()
-				.name("Ciężarki")
-				.description("Wolne ciężarki, które można wykorzystać do wielu różnych ćwiczeń")
+				.name("Free weights")
+				.description("Free weights that can be use for many different strength exercises")
 				.build();
 		gearCategoryRepository.save(gc2);
 
 
 		Gear g1 = Gear.builder()
 				.gearCategory(gc1)
-				.name("rower")
-				.exerciseDescription("Pedałowanie")
+				.name("Bicycle")
+				.exerciseDescription("Cycling is a low impact cardio modality that does not interfere with strength training")
 				.build();
 
 		Gear g2 = Gear.builder()
 				.gearCategory(gc1)
-				.name("Bieżnia")
-				.exerciseDescription("Bieganie")
+				.name("Treadmill")
+				.exerciseDescription("Running on a treadmill is a great way to burn calories, however it is also hard on the joints")
 				.build();
 
 		Gear g3 = Gear.builder()
 				.gearCategory(gc2)
-				.name("Hantle")
+				.name("Dumbbells")
 				.build();
 
 		Gear g4 = Gear.builder()
 				.gearCategory(gc2)
-				.name("Sztangi")
+				.name("Barbells")
 				.build();
 		gearRepository.saveAll(List.of(g1, g2, g3, g4));
 
 		TrainingTrip tt1 = TrainingTrip.builder()
 				.trainer(ts2)
-				.name("Kalistenika")
-				.destination("Sosnowiec")
-				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
-				.topics(Set.of("Siła", "Masa"))
+				.name("Calisthenics")
+				.destination("Egypt")
+				.description("Body-weight exercises")
+				.topics(Set.of("Strength training", "Hypertrophic training"))
 				.startDate(LocalDate.parse("2024-06-15"))
 				.endDate(LocalDate.parse("2024-06-27"))
 				.baseStatus(TripStatus.PUBLISHED)
@@ -140,20 +138,20 @@ public class DataSeeder {
 		TrainingTrip tt2 = TrainingTrip.builder()
 				.name("Cardio")
 				.trainer(ts2)
-				.destination("Sosnowiec")
-				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
-				.topics(Set.of("Siła", "Masa"))
+				.destination("London")
+				.description("Training for weight-loss and cardiovascular health")
+				.topics(Set.of("weight-loss", "cardiovascular health"))
 				.startDate(LocalDate.parse("2024-07-15"))
 				.endDate(LocalDate.parse("2024-07-24"))
 				.baseStatus(TripStatus.PUBLISHED)
 				.build();
 
 		TrainingTrip tt3 = TrainingTrip.builder()
-				.name("Siłownia")
+				.name("Training in the gym")
 				.trainer(ts2)
-				.destination("Sosnowiec")
-				.description("Ćwiczenia z masą własnego ciała w celu zwiększenia masy mieśni oraz siły")
-				.topics(Set.of("Siła", "Masa"))
+				.destination("Warsaw")
+				.description("Utilising free weights and machines in training")
+				.topics(Set.of("Muscle anatomy", "Latest research on lengthened partials"))
 				.startDate(LocalDate.parse("2024-06-25"))
 				.endDate(LocalDate.parse("2024-07-07"))
 				.baseStatus(TripStatus.PUBLISHED)
@@ -162,12 +160,12 @@ public class DataSeeder {
 		trainingTripRepository.saveAll(List.of(tt1, tt2, tt3));
 
 		Certificate c1 = Certificate.builder()
-				.name("Hipertrofia")
-				.institution("Akademia Nauk Sportowych")
+				.name("Hypertrophy I")
+				.institution("Enlightenment periodization")
 				.build();
 		Certificate c2 = Certificate.builder()
-				.name("Układ krążeniowy człowieka III")
-				.institution("Polskie towarzystwo kardiologiczne")
+				.name("Weightloss II+")
+				.institution("San Escobar academy of Sciences")
 				.build();
 
 		certificateRepository.saveAll(List.of(c1, c2));
@@ -195,9 +193,9 @@ public class DataSeeder {
 				.hoursWithTrainer(1)
 				.dailyCalorieCount(2000)
 				.dietaryRestrictions(Set.of("Vegan", "Lactose Intolerant"))
-				.cuisineDescription("Good i guess")
-				.name("Pełny plan dieta + siłownia dla zabieganychj")
-				.description("Plan łączący dietę i 3 godziny w siłowni dla osób zaczynających przygodę z fitnessem")
+				.cuisineDescription("A well balanced diet for vegans.")
+				.name("Vegan diet + gym for busy people.")
+				.description("A plan that provides both the dietary and training resources for people at the beginning of their fitness journey")
 				.cost(BigDecimal.ONE)
 				.build();
 		subscriptionRepository.save(subscription);
@@ -205,7 +203,7 @@ public class DataSeeder {
 		Client cl1 = Client.builder().creditCardNumber("4539135733660738")
 				.weight(70)
 				.height(1.80)
-				.goal("Rozwój mięśni")
+				.goal("Muscular hypertrophy")
 				.name("Marek Tarek")
 				.alias("matar")
 				.build();

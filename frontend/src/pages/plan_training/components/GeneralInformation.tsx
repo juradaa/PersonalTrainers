@@ -29,38 +29,38 @@ export const GeneralInformation = ({tripData, setTripData, setStep, formRef}: Pr
     return (
         <div className="flex justify-between flex-col h-full">
             <div>
-                <h2 className="text-3xl font-semibold">Podstawowe informacje</h2>
+                <h2 className="text-3xl font-semibold">Basic information</h2>
                 <div className="">
-                    <EnhancedInputArea validationMessage={"To pole jest obowiązkowe"}
-                                       labelMessage={"nazwa:"}
+                    <EnhancedInputArea validationMessage={"This field is required"}
+                                       labelMessage={"name"}
                                        type="text"
                                        value={tripData.name}
                                        id="name"
                                        name="name"
                                        required
                                        onChange={onChange}
-                                       placeholder="Np. Warsztaty kalistenicze w Dąbrowie Górniczej"
+                                       placeholder="eg. Calisthenics for intermediate trainees"
                     />
-                    <EnhancedInputArea validationMessage={"To pole jest obowiązkowe"}
-                                       labelMessage={"destynacja"}
+                    <EnhancedInputArea validationMessage={"This field is required"}
+                                       labelMessage={"destination"}
                                        type="text"
                                        value={tripData.destination}
                                        id={"destination"}
                                        name={"destination"}
                                        required
                                        onChange={onChange}
-                                       placeholder="Np. Dąbrowa górnicza"
+                                       placeholder="eg. Egypt"
                     />
                     <EnhancedInputArea
                         isTextArea
-                        validationMessage={"Minimalna długość to 25 znaków"}
-                        labelMessage={"opis"}
+                        validationMessage={"Description can't be shorter than 25 characters"}
+                        labelMessage={"description"}
                         value={tripData.description}
                         id={"description"}
                         name={"description"}
                         required
                         onChange={onChange}
-                        placeholder="Ważne rzeczy"
+                        placeholder="eg. A trip to egypt that combines tourism with learning about training..."
                         rows={5}
                         minLength={25}
                     />
@@ -68,7 +68,7 @@ export const GeneralInformation = ({tripData, setTripData, setStep, formRef}: Pr
             </div>
             <div className="flex justify-end">
                 <ValidationButton enabled={true} onClick={moveNext}>
-                    Dalej
+                    Next
                 </ValidationButton>
 
             </div>

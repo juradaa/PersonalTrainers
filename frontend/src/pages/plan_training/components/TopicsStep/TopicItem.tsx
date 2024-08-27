@@ -30,7 +30,7 @@ export const TopicItem = ({setTripData, topic}: Props) => {
     return (
         <li className="flex outline-none gap-6 items-center border-b-2 border-gray-600 py-2 relative">
             {topic.topic.length == 0 &&
-                <div className="absolute top-0 right-12 text-red-700">Pole nie może być puste</div>}
+                <div className="absolute top-0 right-12 text-red-700">Field cannot be empty</div>}
             <input
                 className="grow-[1] border-none border-b-2"
                 value={topic.topic}

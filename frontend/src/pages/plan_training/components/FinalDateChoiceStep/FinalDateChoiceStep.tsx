@@ -3,15 +3,13 @@ import {getTrainersFutureTrips} from "../../../../services/trainerService.ts";
 import TrainingTrip from "../../../../types/TrainingTrip.ts";
 import {SimpleButton} from "../../../../components/SimpleButton.tsx";
 import {ValidationButton} from "../../../../components/ValidationButton.tsx";
-import DatePicker, {registerLocale} from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
-import {pl} from 'date-fns/locale/pl'
 import {TripDateLi} from "./TripDateLi.tsx";
 import {Toggle} from "../../../../components/Toggle.tsx";
 import {postTrip} from "../../../../services/TripService.ts";
 import {useNavigate} from "react-router-dom";
 
-registerLocale('pl', pl)
 
 type Props = {
     tripData: TrainingTrip,
@@ -79,7 +77,6 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
             <div className="flex gap-8 text-xl flex-col sm:flex-row">
                 <div className="grow-[1]  basis-0">
                     <DatePicker
-                        locale="pl"
                         dateFormat="yyyy-MM-dd"
                         minDate={new Date(Date.now())}
                         selected={tripData.startDate}
@@ -89,26 +86,26 @@ export const FinalDateChoiceStep = ({tripData, setTripData, setStep}: Props) => 
                         selectsRange/>
                 </div>
                 <div className="grow-[1] basis-0">
-                    <p className="font-semibold">Trener jest zajęty w okresach:</p>
-                    <p className="text-slate-700 font-semibold text-sm mt-1 mb-2">Najedź myszką na wycieczkę aby zobaczyć nazwę</p>
+                    <p className="font-semibold">Trainer is busy during:</p>
+                    <p className="text-slate-700 font-semibold text-sm mt-1 mb-2">Hover over a trip to see its name</p>
                     <ul className="space-y-2">
                         {trips?.map(trip => <TripDateLi tripDateRange={trip} isConflicted={trip.isConflicted} key={trip.endDate}/>)}
                     </ul>
                 </div>
             </div>
             <div className="mt-auto bg-violet-100 flex justify-center items-center  gap-2 sm:gap-4 md:gap-16 text-violet-900 font-semibold p-4 mb-4">
-                <p>dodaj szkic</p>
+                <p>Add draft</p>
                 <Toggle onClick={onToggle} isActive={tripData.shouldPublishImmediately}/>
-                <p>opublikuj</p>
+                <p>Publish</p>
             </div>
 
             <div className=" flex justify-between">
                 <SimpleButton onClick={() => setStep(s => s - 1)}>
-                    Wróć
+                    Back
                 </SimpleButton>
 
                 <ValidationButton enabled={enabled} onClick={submit}>
-                    Dalej
+                    Next
                 </ValidationButton>
             </div>
         </div>

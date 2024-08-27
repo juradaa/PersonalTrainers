@@ -48,7 +48,7 @@ export const CategoriesStep = ({tripData, setTripData, setStep, gearCategories, 
         <div className="h-full flex flex-col">
             <div className="flex gap-8 text-xl flex-col sm:flex-row">
                 <div className="grow-[1] basis-0 ">
-                    <h2 className="text-2xl font-semibold">Wybierz kategorię...</h2>
+                    <h2 className="text-2xl font-semibold">Choose a category...</h2>
                     <ul className="flex  gap-0 flex-wrap sm:block">
                         {gearCategories?.map(gc => <GearCategoryLi category={gc} onClick={chooseCategory}
                                                                    currentCategory={currentCategory} tripData={tripData}
@@ -57,7 +57,7 @@ export const CategoriesStep = ({tripData, setTripData, setStep, gearCategories, 
 
                 </div>
                 <div className="grow-[1] basis-0">
-                    <h2 className="text-2xl font-semibold">Oraz rodzaje sprzętu...</h2>
+                    <h2 className="text-2xl font-semibold">And gear types...</h2>
                     <ul>
                         {currentCategory != undefined && gearCategories != undefined &&
                             gearCategories?.filter(gc => gc.id == currentCategory)[0]
@@ -69,11 +69,11 @@ export const CategoriesStep = ({tripData, setTripData, setStep, gearCategories, 
 
             <div className="mt-auto flex justify-between">
                 <SimpleButton onClick={() => setStep(s => s - 1)}>
-                    Wróć
+                    Back
                 </SimpleButton>
 
                 <ValidationButton enabled={true} onClick={() => setStep(s => s + 1)}>
-                    Dalej
+                    Next
                 </ValidationButton>
             </div>
         </div>

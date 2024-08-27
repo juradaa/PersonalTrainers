@@ -20,9 +20,7 @@ export const TrainerChoiceStep = ({tripData, setTripData, setStep} : Props) => {
     //debouncing
     useEffect(() => {
 
-            console.log("here")
             const timeoutId = setTimeout(() => {
-                console.log("there")
                 if (searched.length > 2) {
                     searchSenior(searched)
                         .then(res => {
@@ -67,11 +65,11 @@ export const TrainerChoiceStep = ({tripData, setTripData, setStep} : Props) => {
             </div>
             <div className="mt-auto flex justify-between">
                 <SimpleButton onClick={()=>setStep(s=>s-1)}>
-                    Wróć
+                    Back
                 </SimpleButton>
 
                 <ValidationButton enabled={tripData.trainer !== undefined} onClick={()=>setStep(s=>s+1)}>
-                    Dalej
+                    Next
                 </ValidationButton>
             </div>
         </div>
