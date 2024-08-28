@@ -1,6 +1,12 @@
 name: trainers
 
 services:
+  frontend:
+    restart: always
+    build:
+      context: frontend
+    ports:
+      - 5000:5000
   backend:
     restart: always
     build:
