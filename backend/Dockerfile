@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine AS build
+FROM maven:3.9.9-amazoncorretto-17-alpine AS build
 
 WORKDIR /usr/src/app
 
@@ -6,7 +6,7 @@ EXPOSE 8080
 
 COPY . .
 
-RUN ./mvnw package
+RUN mvn package
 
 FROM openjdk:17-jdk-alpine
 

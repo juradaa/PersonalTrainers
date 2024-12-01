@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,7 +24,7 @@ public class TrainingTripServiceImpl implements TrainingTripService {
 
 	@Override
 	public List<TrainingTrip> getFutureTripsForTrainer(long trainerId) {
-		return trainingTripRepository.findTrainersFutureTrips(trainerId);
+		return trainingTripRepository.findTrainersTripsAfter(trainerId, LocalDate.now());
 	}
 
 
