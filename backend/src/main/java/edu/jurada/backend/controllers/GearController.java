@@ -33,17 +33,16 @@ public class GearController {
 
 	Logger logger = LoggerFactory.getLogger(GearController.class);
 	@GetMapping
-	public ResponseEntity<List<GearCategoryDto>> gearCategoryDtoList() {
+	public ResponseEntity<List<GearCategoryDto>> getGearCategories() {
 		List<GearCategory> categories = gearService.getAllGearCategories();
 		List<GearCategoryDto> dtos = categories.stream().map((element) -> modelMapper.map(element, GearCategoryDto.class)).collect(Collectors.toList());
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
 
 	@GetMapping("{id}/gear")
-	public ResponseEntity<List<GearDto>> getGearsCategory(@PathVariable("id") long id){
+	public ResponseEntity<List<GearDto>> getGearsFromCategory(@PathVariable("id") long id){
 		Optional<GearCategory> withGear = gearService.getWithGear(id);
 		if(withGear.isEmpty()){
-			System.out.println("id = " + id);
 			return ResponseEntity.notFound().build();
 		}
 		Set<Gear> gearSet = withGear.get().getGearSet();

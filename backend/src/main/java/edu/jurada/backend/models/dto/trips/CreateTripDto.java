@@ -5,6 +5,7 @@ import edu.jurada.backend.models.validation.TemporalRangeEvent;
 import edu.jurada.backend.models.validation.ValidTemporalRange;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +17,9 @@ import java.util.List;
 @Data
 @ValidTemporalRange
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
 public class CreateTripDto implements TemporalRangeEvent {
+	// only for response
 	private Long id;
 	@NotBlank
 	private String name;
@@ -28,7 +31,6 @@ public class CreateTripDto implements TemporalRangeEvent {
 	@NotEmpty
 	@NotNull
 	private List<TripTopicWrapperDto> topics;
-	@FutureOrPresent
 	@NotNull
 	private LocalDate startDate;
 	@NotNull

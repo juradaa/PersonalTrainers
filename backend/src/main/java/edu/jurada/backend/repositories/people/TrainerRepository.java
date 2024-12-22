@@ -12,7 +12,7 @@ public interface TrainerRepository extends JpaRepository<Trainer,Long> {
 			"where type = 'SENIOR' and (lower(name) like  lower(concat('%',:phrase,'%'))" +
 			" or lower(alias) like lower(concat('%',:phrase,'%'))) " +
 			"order by " +
-			"case when lower(concat('%', :phrase,'%')) = lower(alias) or lower(concat('%', :phrase,'%')) = lower(name) then 0 " +
+			"case when lower(:phrase) = lower(alias) or lower(:phrase) = lower(name) then 0 " +
 			"else case when lower(alias) like lower(concat('%', :phrase,'%')) then 1 " +
 			"else 2 end end limit 10")
 	List<Trainer> searchSeniors(String phrase);

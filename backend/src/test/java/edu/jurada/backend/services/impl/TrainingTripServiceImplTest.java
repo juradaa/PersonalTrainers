@@ -116,7 +116,7 @@ class TrainingTripServiceImplTest {
 		underTest.createTrip(trainingTrip, List.of(g1,g2), trainer);
 
 		//then
-		verify(trainingTripRepository).existsOverlapping(trainer,LocalDate.parse("2024-07-15"),LocalDate.parse("2024-06-27"));
+		verify(trainingTripRepository).existsOverlapping(trainer,LocalDate.parse("2024-06-15"),LocalDate.parse("2024-06-27"));
 		verify(trainingTripRepository).save(trainingTrip);
 		verify(gearRepository).saveAll(List.of(g1,g2));
 

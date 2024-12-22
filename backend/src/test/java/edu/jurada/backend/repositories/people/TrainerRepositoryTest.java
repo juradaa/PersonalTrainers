@@ -1,5 +1,6 @@
 package edu.jurada.backend.repositories.people;
 
+import edu.jurada.backend.models.people.Person;
 import edu.jurada.backend.models.people.Trainer;
 import edu.jurada.backend.models.people.TrainerType;
 import org.junit.jupiter.api.Test;
@@ -58,10 +59,9 @@ class TrainerRepositoryTest {
 		List<Trainer> trainers = underTest.searchSeniors("joe");
 
 		// then
-		assertEquals(3, trainers.size());
-		assertEquals(ts1, trainers.get(0));
-		assertEquals(ts3, trainers.get(1));
-		assertEquals(ts2, trainers.get(2));
+		List<Long> actual = trainers.stream().map(Person::getId).toList();
+		List<Long> expected = List.of(ts1.getId(), ts3.getId(), ts2.getId());
+		assertEquals(expected, actual);
 	}
 
 	@Test
