@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,10 +22,11 @@ import java.util.List;
 public class TrainingTripServiceImpl implements TrainingTripService {
 	private final TrainingTripRepository trainingTripRepository;
 	private final GearRepository gearRepository;
+	private final Clock clock;
 
 	@Override
 	public List<TrainingTrip> getFutureTripsForTrainer(long trainerId) {
-		return trainingTripRepository.findTrainersFutureTrips(trainerId);
+		return trainingTripRepository.findTrainersTripsAfter(trainerId, LocalDate.now(clock));
 	}
 
 

@@ -1,6 +1,5 @@
 package edu.jurada.backend.controllers;
 
-import edu.jurada.backend.exceptions.TripsOverlapException;
 import edu.jurada.backend.models.dto.trips.CreateTripDto;
 import edu.jurada.backend.models.dto.trips.TripTopicWrapperDto;
 import edu.jurada.backend.models.people.Trainer;
@@ -12,7 +11,6 @@ import edu.jurada.backend.services.TrainerService;
 import edu.jurada.backend.services.TrainingTripService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,19 +29,18 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/trainingTrips")
 @RequiredArgsConstructor
-public class TripController {
+public class TrainingTripsController {
 	private final TrainingTripService trainingTripService;
 	private final TrainerService trainerService;
 	private final GearService gearService;
 
-	Logger logger = LoggerFactory.getLogger(TripController.class);
+	Logger logger = LoggerFactory.getLogger(TrainingTripsController.class);
 
 	@PostMapping
 	@Transactional(isolation = Isolation.SERIALIZABLE) // serializable because phantom trips can overlap
 	public ResponseEntity<CreateTripDto> postTrip(@RequestBody @Valid CreateTripDto tripData) {
 		List<Long> gearIds = tripData.getGearIds().stream().distinct().toList();
 		List<Gear> gearFromDb = gearService.findAllById(gearIds);
-		logger.trace(gearFromDb.toString());
 		if (gearFromDb.size() != gearIds.size()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -52,7 +49,6 @@ public class TripController {
 			return ResponseEntity.notFound().build();
 		}
 		Trainer trainer = optionalTrainer.get();
-		logger.trace(trainer.toString());
 
 		TrainingTrip trainingTrip = TrainingTrip.builder()
 				.name(tripData.getName())
@@ -64,10 +60,8 @@ public class TripController {
 				.baseStatus(tripData.isShouldPublishImmediately() ? TripStatus.PUBLISHED : TripStatus.DRAFT)
 				.build();
 
-		logger.trace("here");
 		TrainingTrip trip = trainingTripService.createTrip(trainingTrip, gearFromDb, trainer);
-		logger.trace("there");
 		tripData.setId(trip.getId());
-		return new ResponseEntity<>(tripData, HttpStatus.OK);
+		return new ResponseEntity<>(tripData, HttpStatus.CREATED);
 	}
 }

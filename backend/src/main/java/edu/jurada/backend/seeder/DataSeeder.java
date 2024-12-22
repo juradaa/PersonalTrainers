@@ -21,18 +21,18 @@ import edu.jurada.backend.repositories.trips.TrainingTripRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cglib.core.Local;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 @Component
+@Profile({"dev", "prod"})
 @RequiredArgsConstructor
 public class DataSeeder {
 	private final TrainerRepository trainerRepository;
@@ -127,7 +127,7 @@ public class DataSeeder {
 				.trainer(ts2)
 				.name("Calisthenics")
 				.destination("Egypt")
-				.description("Body-weight exercises")
+				.description("Body-weight exercises for strength and hypertrophy")
 				.topics(Set.of("Strength training", "Hypertrophic training"))
 				.startDate(LocalDate.parse("2024-06-15"))
 				.endDate(LocalDate.parse("2024-06-27"))
