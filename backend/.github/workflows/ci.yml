@@ -1,0 +1,40 @@
+name: Build and push images
+
+on:
+  push:
+    branches:
+      - main
+      - push-docker-action
+
+jobs:
+  build-push:
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Run backend tests
+        run: mvn --batch-mode --update-snapshots verify
+
+      - name: Login to docker
+        uses: docker/login-action@v3
+        with:
+          username: $${vars.DH_USERNAME}}
+          password: $${secrets.DH_PASSWORD}}
+      - name: build and push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: true
+          tags: $${vars.DH_USERNAME}}/pt-frontend
+      - name: build and push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          push: true
+          tags: $${vars.DH_USERNAME}}/pt-backend
