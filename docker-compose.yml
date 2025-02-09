@@ -16,6 +16,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=ChangeMe
+      - SPRING_CORS_ORIGIN=http://localhost:80
 
 
   database:
@@ -34,6 +35,9 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
+    depends_on:
+      - backend
+      - frontend
 
 volumes:
   trainers-data:
