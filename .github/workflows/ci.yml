@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - push-docker-action
 
 jobs:
   build-push:
